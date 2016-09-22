@@ -10,6 +10,10 @@ func isSalad(ingredients []string, housing string) bool {
     if v == "lettuce" || v == "kale" || v == "field greens" {
       salad = true
     }
+    // Bread implies sandwich (ie BLT, Cheeseburger)
+    if v == bread {
+      return false
+    }
   }
 
   if !salad {
