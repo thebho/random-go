@@ -11,7 +11,7 @@ func isSalad(ingredients []string, housing string) bool {
       salad = true
     }
     // Bread implies sandwich (ie BLT, Cheeseburger)
-    if v == bread {
+    if v == "bread" {
       return false
     }
   }
@@ -30,5 +30,5 @@ func isSalad(ingredients []string, housing string) bool {
 }
 
 func main() {
-  println("Salad:", isSalad([]string{"lettuce", "tomato", "crouton"}, "plate"))
+  println("Salad:", isSalad([]string{"lettuce", "tomato", "brea"}, "plate"))
 }
