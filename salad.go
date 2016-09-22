@@ -1,8 +1,10 @@
 package main
 
-func isSalad(ingredients []string, housing string) bool {
+import "fmt"
+
+func isSalad(ingredients []string, servingDevice string) bool {
   salad := false
-  if housing != "bowl" && housing != "plate" {
+  if servingDevice != "bowl" && servingDevice != "plate" {
     return false
   }
 
@@ -30,5 +32,30 @@ func isSalad(ingredients []string, housing string) bool {
 }
 
 func main() {
-  println("Salad:", isSalad([]string{"lettuce", "tomato", "brea"}, "plate"))
-}
+  ingredients := []string{"tomato", "mayo", "spinach"}
+  servingDevice := "bowl"
+  print("A meal with the ingredients:")
+
+  for i,v := range ingredients {
+    last := false
+    if i == len(ingredients) - 1 {
+      last = true
+      print(" and")
+    }
+    print(" ")
+    print(v)
+    if !last && len(ingredients) > 2 {
+      print(",")
+    }
+  }
+  print(", served")
+  if servingDevice == "bowl" {
+    print(" in a bowl, is")
+    } else {
+      print(fmt.Sprintf(" on a %s, is", servingDevice))
+    }
+    if !isSalad(ingredients, servingDevice) {
+      print(" not")
+    }
+    print(" a salad.\n")
+  }
