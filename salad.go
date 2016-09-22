@@ -7,11 +7,11 @@ func isSalad(ingredients []string, housing string) bool {
   }
 
   for _,v := range ingredients {
-    if v == "lettuce" || v == "kale" || v == "field greens" {
+    if v == "lettuce" || v == "kale" || v == "field greens" || v == "spinach"  {
       salad = true
     }
     // Bread implies sandwich (ie BLT, Cheeseburger)
-    if v == "bread" {
+    if v == "bread" || v == "crust" || v == "pita" || v == "wrap" || v == "tortilla" {
       return false
     }
   }
