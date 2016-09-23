@@ -2,27 +2,43 @@ package main
 
 import "fmt"
 
-func isSalad(ingredients []string, servingDevice string) bool {
+var saladRequirements = []string{"lettuce", "kale", "field greens", "spinach"}
+var saladExclusions = []string{"bread", "crust", "pita", "wrap", "tortilla"}
+var ingredientMin = 3
+
+var ingredients = []string{"tomato", "mayo"}
+
+func testRequirements(ingredients []string, requirements []string, exclusions []string) (valid bool) {
+  for _,v := range ingredients {
+    for _,vv := range requirements {
+      if v == vv {
+        valid = true
+      }
+    }
+
+    for _,vx := range exclusions {
+      if v == vx {
+        return false
+      }
+    }
+  }
+  return
+}
+
+func isMeal(ingredients []string, servingDevice string) bool {
   salad := false
   if servingDevice != "bowl" && servingDevice != "plate" {
     return false
   }
 
-  for _,v := range ingredients {
-    if v == "lettuce" || v == "kale" || v == "field greens" || v == "spinach"  {
-      salad = true
-    }
-    // Bread implies sandwich (ie BLT, Cheeseburger)
-    if v == "bread" || v == "crust" || v == "pita" || v == "wrap" || v == "tortilla" {
-      return false
-    }
-  }
+
+  salad = testRequirements(ingredients, saladRequirements, saladExclusions)
 
   if !salad {
     return false
   }
 
-  if len(ingredients) >= 3 {
+  if len(ingredients) >= ingredientMin {
     salad = true
   } else {
     return false
@@ -32,7 +48,7 @@ func isSalad(ingredients []string, servingDevice string) bool {
 }
 
 func main() {
-  ingredients := []string{"tomato", "mayo", "spinach"}
+
   servingDevice := "bowl"
   print("A meal with the ingredients:")
 
@@ -54,7 +70,7 @@ func main() {
     } else {
       print(fmt.Sprintf(" on a %s, is", servingDevice))
     }
-    if !isSalad(ingredients, servingDevice) {
+    if !isMeal(ingredients, servingDevice) {
       print(" not")
     }
     print(" a salad.\n")
