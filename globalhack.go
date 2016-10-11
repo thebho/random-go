@@ -2,21 +2,24 @@ package main
 
 import (
   "time"
-  "fmt"
+  . "fmt"
 )
 
-func Hack() {
+const GH = "globalhack"
+
+func Hack(hours int) {
   kickOff := time.Now()
   for {
-    timeDiff := int(48 - time.Now().Sub(kickOff).Hours())
-    if timeDiff <= 0 {
+    toGo := hours - int(time.Now().Sub(kickOff).Hours())
+    if toGo <= 0 {
+      Printf("go run %s.go #%s\n", GH, GH)
       break
     }
-    time.Sleep(1 * time.Second)
-    fmt.Printf("%d hours to go #globalhack\n", timeDiff)
+    Printf("%d hours to go{lang} in #%s\n", toGo, GH)
+    time.Sleep(60 * 60 * time.Second)
   }
 }
 
 func main() {
-  Hack()
+  Hack(48)
 }
